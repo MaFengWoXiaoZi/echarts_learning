@@ -8,7 +8,74 @@
         <div id = "bar" style="height:600px"></div>
         <script text="text/javascript">
             var myChart = echarts.init(document.getElementById("bar"));  // 使用已经定义好的dom节点来初始化echarts实例
-            
+
+            // 柱状图的用法
+            var option = {
+                tilte: { // 对标题的配置
+                    text: "柱状图", // 主标题
+                    subtext: "By Haoran", // 副标题
+                    left: "left", // 标题的左右位置
+                    top: "top", // 标题上下位置
+                    borderColor: "red", // 边框颜色
+                    borderWidth: 5, // 边框宽度
+                    textStyle: { // 设置标题文本的样式, css中的相关写法变为camel骆驼命名法
+                        fontSize: 20,
+                        fontFamily: "微软雅黑"
+                    }
+                },
+                toolbox: { // 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
+				    show: true,
+				    feature: {
+					    dataView: { // 打开数据视图
+						    show: true
+					    },
+                        restore: { // 重置
+                            show: true
+                        },
+                        dataZoom: { // 设置数据区域缩放
+                            show: true
+                        },
+                        saveAsImage: { // 设置导出图片
+                            show: true
+                        },
+                        magicType: { // 设置动态类型转换
+                            type: ['bar']
+                        }
+                    }
+			    },
+                tooltip: { // 提示框组件
+				    show: true, // 是否显示提示框组件，包括提示框浮层和 axisPointer
+				    trigger: 'item' // 触发类型, item为数据项图形触发, axis坐标轴触发, none什么也不触发
+			    },
+                legend: {
+				    data: ['销量'] // 设置图例
+			    },
+                xAxis: {
+				    data: ['羊毛衫', '衬衫', '雪纺衫', '裤子', '高跟鞋', '袜子'] // 类目数据，在类目轴（type: 'category'）中有效
+			    },
+                yAxis: {}, // 类目数据，在类目轴（type: 'category'）中有效, 但此图中y轴不包含类目数据, 因此为空
+                series: [{ // 系列列表。每个系列通过 type 决定自己的图表类型
+                    name: '销量', // 系列1
+                    type: 'bar', // 柱状图类型
+                    data: [5, 20, 36, 10, 10, 20], // 具体的数据
+                    markPoint: { // 图标标注
+                        data: [ // 标注的数据数组。每个数组项是一个对象
+                            {type: 'max', name: '最大值', symbol: 'pin'}, // 最大值
+                            {type: 'min', name: '最小值'} // 最小值
+                        ]
+                    },
+                    markLine: { // 图标标线
+                        data: [
+                            {type: 'average', name: '平均值', symbol: 'arrow'} // 通图标标注
+                        ]
+                    }
+                }]
+            };
+
+            // 使用刚刚指定的配置项和数据显示图表
+            myChart.setOption(option);
+
+
             
         </script>
     </body>
